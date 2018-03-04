@@ -1,35 +1,92 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { Container, Grid } from 'semantic-ui-react'
 
-import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
 import './index.css'
 
-const TemplateWrapper = ({ children }) => (
-  <div>
+const BaseLayout = ({ children, data, location }) => {
+  return <Container>
     <Helmet
-      title='Gatsby Default Starter'
+      title={data.site.siteMetadata.title}
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' }
       ]}
-    />
-    <Header />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0
-      }}
     >
-      {children()}
-    </div>
-  </div>
-)
+      <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css' />
+      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/themes/prism.css' />
+      <script async defer src='https://buttons.github.io/buttons.js' />
+    </Helmet>
 
-TemplateWrapper.propTypes = {
+    <Grid>
+      <Sidebar
+        location={location}
+        site={data.site.siteMetadata}
+        guides={data.guides.edges}
+        references={data.references.edges}
+      />
+      <Grid.Column width={12}>
+        {children()}
+      </Grid.Column>
+    </Grid>
+  </Container>
+}
+
+BaseLayout.propTypes = {
   children: PropTypes.func
 }
 
-export default TemplateWrapper
+export default BaseLayout
+
+export const query = graphql`
+  query LayoutQuery {
+    site {
+      siteMetadata {
+        title,
+        github {
+          package,
+          url
+        }
+        npm {
+          package,
+          url
+        }
+      }
+    }
+
+    guides: allMarkdownRemark(
+      filter: { frontmatter: { layout: { eq: "guide" }}}
+      sort: { order: ASC, fields: [frontmatter___title] }
+    ) {
+      edges {
+        node {
+          ...fileData
+        }
+      }
+    }
+
+    references: allMarkdownRemark(
+      filter: { frontmatter: { layout: { eq: "docs" }}}
+      sort: { order: ASC, fields: [frontmatter___title] }
+    ) {
+      edges {
+        node {
+          ...fileData
+        }
+      }
+    }
+  }
+
+  fragment fileData on MarkdownRemark {
+    frontmatter {
+      title
+    }
+    parent {
+      ... on File {
+        name
+      }
+    }
+  }
+`
