@@ -1,9 +1,12 @@
 import React from 'react'
-import { Button, Container, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
+
+import { Footer } from '../components'
 
 const Guide = ({ data }) => {
   const {
     file: {
+      base,
       markdown: { frontmatter, html },
       sourceInstanceName
     },
@@ -12,18 +15,13 @@ const Guide = ({ data }) => {
 
   return <div>
     <Header as='h1'>{ frontmatter.title }</Header>
+
     <div dangerouslySetInnerHTML={{ __html: html }} />
 
-    <Container as='footer' textAlign='center'>
-      <Button
-        basic
-        as='a'
-        href={`${site.github.url}/tree/master/${site.docsDirectory}/${sourceInstanceName}`}
-        target='blank'
-      >
-        Edit on GitHub
-      </Button>
-    </Container>
+    <Footer
+      site={site}
+      path={`${site.docsDirectory}/${sourceInstanceName}/${base}`}
+    />
   </div>
 }
 
@@ -40,6 +38,7 @@ export const pageQuery = graphql`
       }
     }
     file(name: { eq: $fileName }) {
+      base
       sourceInstanceName
       markdown: childMarkdownRemark {
         html

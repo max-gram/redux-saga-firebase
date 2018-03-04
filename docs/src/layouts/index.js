@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Container, Grid } from 'semantic-ui-react'
 
-import Sidebar from '../components/Sidebar'
+import { Sidebar } from '../components'
 import './index.css'
 
 const BaseLayout = ({ children, data, location }) => {
