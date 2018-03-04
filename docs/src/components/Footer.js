@@ -1,8 +1,13 @@
 import React from 'react'
 import { Button, Container } from 'semantic-ui-react'
+import styled from 'styled-components'
+
+const StyledContainer = styled(Container)`
+  margin: 3rem 0;
+`
 
 const Footer = ({ path, site }) => {
-  return <Container as='footer' textAlign='center'>
+  return <StyledContainer as='footer' textAlign='center'>
     <Button
       basic
       as='a'
@@ -11,7 +16,7 @@ const Footer = ({ path, site }) => {
     >
       Edit on GitHub
     </Button>
-  </Container>
+  </StyledContainer>
 }
 
 export default Footer
