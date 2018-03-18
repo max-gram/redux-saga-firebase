@@ -33,4 +33,5 @@ const createPagesBuilder = (sourceInstanceName, templatePath) => ({ boundActionC
 
 exports.createPages = args => {
   createPagesBuilder('guides', 'src/layouts/Guide.js')(args)
+  createPagesBuilder('reference', 'src/layouts/Reference.js')(args)
 }
