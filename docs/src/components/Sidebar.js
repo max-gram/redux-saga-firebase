@@ -60,12 +60,18 @@ class Sidebar extends PureComponent {
         <Menu fluid vertical pointing>
           <Menu.Item
             color='red'
-            active={location.pathname.startsWith('/guides')}
+            active={location.pathname.startsWith('/guides') || location.pathname === '/'}
           >
             <Menu.Header>Guides</Menu.Header>
 
             <Menu.Menu>
-              <Menu.Item color='red' as='a' href='#'>
+              <Menu.Item
+                color='red'
+                as={Link}
+                to='/'
+                exact
+                activeClassName='active'
+              >
                 Getting started
               </Menu.Item>
 
