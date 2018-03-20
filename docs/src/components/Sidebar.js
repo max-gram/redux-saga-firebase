@@ -79,7 +79,7 @@ class Sidebar extends PureComponent {
                 <Menu.Item
                   color='red'
                   as={Link}
-                  to={`/guides/${guide.parent.name}`}
+                  to={`/guides/${guide.parent.name}/`}
                   key={i}
                   activeClassName='active'
                 >
@@ -105,7 +105,7 @@ class Sidebar extends PureComponent {
                 <Menu.Item
                   color='red'
                   as={Link}
-                  to={`/reference/${reference.parent.name}`}
+                  to={`/reference/${reference.parent.name}/`}
                   key={i}
                   activeClassName='active'
                 >
