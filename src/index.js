@@ -1,3 +1,5 @@
+// @ts-check
+
 import assert from './assert'
 import auth from './auth'
 import database from './database'

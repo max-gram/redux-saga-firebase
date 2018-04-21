@@ -16,7 +16,8 @@
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test -- --coverage",
     "test:coverage:win": "yarn test:win -- --coverage",
-    "test:win": "set NODE_ENV=test&&jest"
+    "test:win": "set NODE_ENV=test&&jest",
+    "tsc": "tsc --noEmit"
   },
   "repository": {
     "url": "git@github.com:n6g7/redux-saga-firebase.git",

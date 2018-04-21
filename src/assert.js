@@ -1,3 +1,5 @@
+// @ts-check
+
 const isDev = () => process.env.NODE_ENV !== 'production'
 
 function assert (condition, message) {

@@ -1,3 +1,5 @@
+// @ts-check
+
 import { eventChannel } from 'redux-saga'
 import { call, fork } from 'redux-saga/effects'
 
